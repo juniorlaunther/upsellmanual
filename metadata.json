@@ -1,0 +1,8 @@
+{
+  "name": "Upsell - Manual Para Desenhar",
+  "description": "Página de upsell exclusiva para o Manual Para Desenhar - Edição Especial de Halloween",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
