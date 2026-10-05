@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { AlertTriangle, ShieldCheck, Lock, Sparkles } from 'lucide-react';
 
-const HALLOWEEN_COVER_URL = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWakIQSEx9RoW2rwEr-lP-J5OpUX6ZH4Z9eg50eHXGQwvEkPg0l8gWyzY1ZTOFfeMyvo59VCiGfuqNXE352oLTQfMuyO85Wz0udYsQzPA7e4ZYatOLsLhMhiixbdayvLpfpX5EP4UTnDIvCmV3fiKNEEKT-Pd6W0nSsUXL7ooKWluwCm5kN1uSrJbYpvo/w400-h400/Manual%20de%20halloween%20capa.png";
+const HALLOWEEN_COVER_URL = "/images/manual-halloween.webp";
 
 export default function App() {
   // Ensure the Cakto upsell script is loaded and custom elements registered
