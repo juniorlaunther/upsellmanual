@@ -118,7 +118,8 @@ body {
 }
 
 /* Cakto Upsell Custom Elements Styling - Dark Contemporary */
-cakto-upsell-buttons {
+cakto-upsell-buttons,
+.cakto-actions {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -126,10 +127,27 @@ cakto-upsell-buttons {
   margin-top: 0.75rem !important;
 }
 
-cakto-upsell-accept {
-  display: block !important;
-  width: 100%;
+cakto-upsell-accept,
+.cakto-accept-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
   max-width: 460px !important;
+  background: linear-gradient(135deg, #7C13A0 0%, #9F1ECC 100%) !important;
+  color: #ffffff !important;
+  font-family: 'Patrick Hand', cursive, sans-serif !important;
+  font-size: 1.55rem !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  padding: 0.95rem 1.6rem !important;
+  border: 3px solid #FFA726 !important;
+  border-radius: 1rem !important;
+  box-shadow: 0px 8px 24px rgba(156, 31, 202, 0.45), 3px 3px 0px 0px #000000 !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease !important;
 }
 
 cakto-upsell-accept::part(button) {
@@ -153,26 +171,45 @@ cakto-upsell-accept::part(button) {
 }
 
 @media (min-width: 640px) {
+  cakto-upsell-accept,
+  .cakto-accept-link,
   cakto-upsell-accept::part(button) {
     font-size: 1.85rem !important;
     padding: 1.05rem 2.2rem !important;
   }
 }
 
+cakto-upsell-accept:hover,
+.cakto-accept-link:hover,
 cakto-upsell-accept::part(button):hover {
   transform: translateY(-2px) scale(1.01) !important;
   box-shadow: 0px 12px 30px rgba(156, 31, 202, 0.6), 4px 4px 0px 0px #000000 !important;
   filter: brightness(1.1) !important;
+  color: #ffffff !important;
 }
 
+cakto-upsell-accept:active,
+.cakto-accept-link:active,
 cakto-upsell-accept::part(button):active {
   transform: translateY(2px) !important;
   box-shadow: 0px 4px 12px rgba(156, 31, 202, 0.3), 1px 1px 0px 0px #000000 !important;
 }
 
-cakto-upsell-reject {
-  display: block !important;
+cakto-upsell-reject,
+.cakto-reject-link {
+  font-family: 'Patrick Hand', cursive, sans-serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+  color: #A39BAC !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
+  background-color: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0.35rem 0.75rem !important;
   margin-top: 0.5rem !important;
+  display: inline-block !important;
+  transition: color 0.15s ease !important;
 }
 
 cakto-upsell-reject::part(button) {
@@ -189,6 +226,8 @@ cakto-upsell-reject::part(button) {
   transition: color 0.15s ease !important;
 }
 
+cakto-upsell-reject:hover,
+.cakto-reject-link:hover,
 cakto-upsell-reject::part(button):hover {
   color: #FFFFFF !important;
 }

@@ -1,22 +1,57 @@
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlertTriangle, ShieldCheck, Lock, Sparkles } from 'lucide-react';
 
 const HALLOWEEN_COVER_URL = "/images/manual-halloween.webp";
+const CHECKOUT_URL = "https://pay.cakto.com.br/3fmywcj_1161038";
+const REJECT_URL = "https://downmanualdehalloween.acasadoju.club/";
+
+/**
+ * Constrói uma URL garantindo que todos os parâmetros de rastreamento
+ * (UTMs, src, sck, fbclid, gclid, etc.) sejam sempre preservados e repassados.
+ */
+function buildUrlWithParams(baseUrl: string): string {
+  if (typeof window === 'undefined') return baseUrl;
+
+  try {
+    const targetUrl = new URL(baseUrl);
+
+    // 1. Extrai parâmetros da query string padrão (?utm_source=...)
+    let search = window.location.search;
+
+    // 2. Fallback caso venha em formato de hash router (#/?utm_source=...)
+    if (!search && window.location.hash.includes('?')) {
+      search = window.location.hash.substring(window.location.hash.indexOf('?'));
+    }
+
+    if (search) {
+      const incomingParams = new URLSearchParams(search);
+      incomingParams.forEach((value, key) => {
+        targetUrl.searchParams.set(key, value);
+      });
+    }
+
+    return targetUrl.toString();
+  } catch (err) {
+    console.error('Erro ao construir URL com parâmetros:', err);
+    return baseUrl;
+  }
+}
 
 export default function App() {
-  // Ensure the Cakto upsell script is loaded and custom elements registered
+  const [checkoutHref, setCheckoutHref] = useState(() => buildUrlWithParams(CHECKOUT_URL));
+  const [rejectHref, setRejectHref] = useState(() => buildUrlWithParams(REJECT_URL));
+
+  // Atualiza os links assim que o componente monta
   useEffect(() => {
-    const scriptUrl = "https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js";
-    let script = document.querySelector(`script[src="${scriptUrl}"]`) as HTMLScriptElement | null;
-    
-    if (!script) {
-      script = document.createElement("script");
-      script.src = scriptUrl;
-      script.type = "text/javascript";
-      script.async = true;
-      document.body.appendChild(script);
-    }
+    setCheckoutHref(buildUrlWithParams(CHECKOUT_URL));
+    setRejectHref(buildUrlWithParams(REJECT_URL));
   }, []);
+
+  const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, targetBaseUrl: string) => {
+    e.preventDefault();
+    const finalUrl = buildUrlWithParams(targetBaseUrl);
+    window.location.href = finalUrl;
+  };
 
   return (
     <div className="min-h-screen flex flex-col justify-between selection:bg-[#9C1ECC] selection:text-white font-sans bg-[#0D0814] text-[#F3EEF9] relative overflow-hidden">
@@ -54,7 +89,7 @@ export default function App() {
           Centenas de novas referências temáticas exclusivas para você criar ilustrações de arrepiar, do seu jeito.
         </p>
 
-        {/* Imagem do Livro Grande em Destaque Absoluto */}
+        {/* Imagem do Livro Grande em Destaque Absoluto (WebP Otimizado) */}
         <div className="my-4 sm:my-5 relative flex justify-center items-center w-full">
           <div className="relative group">
             <img 
@@ -70,7 +105,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Preço em Destaque Contemporâneo (Sem Caixas Segmentadas) */}
+        {/* Preço em Destaque Contemporâneo */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-1">
           <span className="line-through text-gray-400 text-base sm:text-lg md:text-xl font-bold">
             De R$ 67,00
@@ -87,27 +122,27 @@ export default function App() {
           Pagamento único • Acesso imediato liberado junto ao seu pedido
         </p>
 
-        {/* Botões Oficiais da Cakto */}
+        {/* Botão de Checkout Oficial da Oferta */}
         <div className="w-full my-3 max-w-md">
-          <cakto-upsell-buttons>
-            <cakto-upsell-accept
-              bg-color="#690d87ff"
-              text-color="#ffffff"
-              upsell-accept-url="members_area"
-              offer-id="3fmywcj"
-              app-base-url="https://app.cakto.com.br"
-              offer-type="upsell"
-              upsell-reject-url="https://downmanualdehalloween.acasadoju.club/"
+          <div className="cakto-actions">
+            <a
+              href={checkoutHref}
+              onClick={(e) => handleNavigate(e, CHECKOUT_URL)}
+              className="cakto-accept-link"
+              id="btn-accept-offer"
             >
               Sim, quero aproveitar a oferta
-            </cakto-upsell-accept>
+            </a>
             
-            <cakto-upsell-reject
-              upsell-reject-url="https://downmanualdehalloween.acasadoju.club/"
+            <a
+              href={rejectHref}
+              onClick={(e) => handleNavigate(e, REJECT_URL)}
+              className="cakto-reject-link"
+              id="btn-reject-offer"
             >
               Recusar Oferta
-            </cakto-upsell-reject>
-          </cakto-upsell-buttons>
+            </a>
+          </div>
         </div>
 
         {/* Ícones de Garantia e Compra 100% Segura */}
