@@ -78,7 +78,7 @@ export default function App() {
           <span className="text-gray-300 text-base sm:text-lg font-medium">
             por apenas
           </span>
-          <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#FFA726] tracking-tight drop-shadow-[0_2px_12px_rgba(255,167,38,0.35)]">
+          <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#FFA726] tracking-tight drop-shadow-[0_2px_12px_rgba(255,167,38,0.35)] animate-price-scale">
             R$ 34,90
           </span>
         </div>

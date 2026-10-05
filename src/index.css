@@ -58,6 +58,21 @@ body {
   animation: scale-pulse 2s ease-in-out infinite;
 }
 
+@keyframes price-scale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.animate-price-scale {
+  display: inline-block;
+  animation: price-scale 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
 @keyframes scale-soft {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.03); }
